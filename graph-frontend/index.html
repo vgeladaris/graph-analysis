@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="code.js"></script>
+        <title>Network Analyser</title>
+
+    </head>
+    <body>
+
+        <main class="container">
+
+            <h1>Network Analyser</h1>
+
+            <p>
+                This is a Graph Analytics Server for analysing social networks, built for 
+                the course project of CS-484 Complex Network Dynamics (University of Crete, 
+                Department of Computer Science). The tool allows for analysing social networks
+                and getting metrics like Critical Connections, Fraud Detection, Link Prediction,
+                Density and Clustering Coefficient calculations. Graphs can be uploaded in .csv
+                or .txt format and node features can be uploaded in .csv format.
+            </p>
+
+            <hr>
+            
+            <label for="edgelist">Upload the edge list of your graph *</label>
+            <input type="file" id="edgelist" name="edgelist" onchange="enableSubmit()">
+            <label for="info">Upload the vertex features</label>
+            <input type="file" id="info" name="info">
+            <small>* required fields</small>
+            <button id="edgelistsubmit" onclick="readFile()">Submit</button>
+
+            <div id="infodiv">
+                <h5>Which of the features is the vertex ID?</h5>
+                <span id="headers"></span>
+            </div>
+
+            <div id="analyse">
+
+                <button onclick="sendRequest('scc')">Critical Connections</button>
+                <button onclick="detectFraud()">Fraud Detection</button>
+                <span id="headers2"></span>
+                <button onclick="showLinkInput()">Link Prediction</button>
+
+                <span id="linkinput">
+                    <label>First vertex ID *</label>
+                    <input id="link1" type="text">
+                    <label>Second vertex ID *</label>
+                    <input id="link2" type="text">
+                    <small>* required fields</small>
+                    <button class="secondary" onclick="predictLink()">Predict</button>
+                </span>
+
+                <button onclick="sendRequest('density')">Calculate Density</button>
+                <button onclick="sendRequest('clustering')">Clustering Coefficient</button>
+
+                <div id="results"></div>
+
+            </div>
+
+        </main>
+
+    </body>
+</html>
